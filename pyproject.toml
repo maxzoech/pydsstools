@@ -58,19 +58,6 @@ repository = "https://github.com/gyanz/pydsstools"
 include-package-data = true
 zip-safe = false
 
-[tool.setuptools.packages.find]
-include = [
-    'pydsstools',
-    'pydsstools._lib',
-    'pydsstools._lib.x64',
-    'pydsstools._lib.x86',
-    'pydsstools.core',
-    'pydsstools.heclib',
-    'pydsstools.heclib.dss',
-    'pydsstools.utils',
-]
-namespaces = false
-
 
 [tool.setuptools.package-data]
 pydsstools = ['examples/*.py','examples/*.ds[cs]',

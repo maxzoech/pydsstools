@@ -1,0 +1,9 @@
+{
+    "name": "Python+heclib",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "postCreateCommand": "pip install -e ."
+
+}
