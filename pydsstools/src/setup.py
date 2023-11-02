@@ -36,14 +36,18 @@ def is_platform_linux():
 
 class BuildExt(build_ext):
     def build_grid_library(self):
+        working_dir = os.getcwd()
+
+        print(f"Build grid library working directory: {working_dir}")
+
         if is_platform_windows():
             print('Building external library: grid.lib')
-            batch_file = join(setup_dir, r'./external/gridv6/build.bat ')
+            batch_file = join(setup_dir, f'{setup_dir}/external/gridv6/build.bat ')
             call(batch_file)
         else:
             print('Building external library: grid.a')
-            make_dir = join(setup_dir, r'./external/gridv6')
-            batch_file = join(setup_dir, r'./external/gridv6/build.sh')
+            make_dir = join(setup_dir, f'{working_dir}./external/gridv6')
+            batch_file = join(setup_dir, f'{setup_dir}/external/gridv6/build.sh')
             with open(batch_file, 'rb') as fid:
                 script = fid.read()
             print('CWD: %s'%make_dir )
@@ -56,17 +60,17 @@ class BuildExt(build_ext):
 
 # Create compiler arguments
 include_dirs = []
-include_dirs.append(r'./external/dss/headers')
-include_dirs.append(r'./external/gridv6/headers')
+include_dirs.append(f'{setup_dir}/external/dss/headers')
+include_dirs.append(f'{setup_dir}/external/gridv6/headers')
 library_dirs = []
 
 if is_platform_windows():
     # headers
-    include_dirs.append(r'./external/zlib')
+    include_dirs.append(f'{setup_dir}/external/zlib')
     # lib dirs
-    library_dirs.append(r'./external/dss/win64')
-    library_dirs.append(r'./external/gridv6/build')
-    library_dirs.append(r'./external/zlib')
+    library_dirs.append(f'{setup_dir}/external/dss/win64')
+    library_dirs.append(f'{setup_dir}/external/gridv6/build')
+    library_dirs.append(f'{setup_dir}/external/zlib')
     # libs
     libraries = ['heclib_c', 'heclib_f', 'zlibstatic', 'grid']
     # extra compile args
@@ -75,8 +79,8 @@ if is_platform_windows():
 
 else:
     # lib dirs
-    library_dirs.append(r'./external/dss/linux64')
-    library_dirs.append(r'./external/gridv6/build')
+    library_dirs.append(f'{setup_dir}/external/dss/linux64')
+    library_dirs.append(f'{setup_dir}/external/gridv6/build')
     # libs
     libraries = [':heclib.a', ':grid.a','gfortran', 'pthread', 'm', 'quadmath', 'z', 'stdc++']
     # extra compile args
