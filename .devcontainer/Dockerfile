@@ -8,6 +8,6 @@ RUN apt install -y python3.10-venv
 ENV JAVA_HOME=/usr/lib/jvm/default-java
 
 # Install heclib
-RUN git clone -j2 --recurse-submodules https://github.com/HydrologicEngineeringCenter/hec-dss.git
-WORKDIR /hec-dss/heclib/
-RUN execute make clean ; make   
+#RUN git clone -j2 --recurse-submodules https://github.com/HydrologicEngineeringCenter/hec-dss.git
+#WORKDIR /hec-dss/heclib/
+#RUN execute make clean ; make   
