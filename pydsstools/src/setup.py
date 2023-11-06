@@ -1,4 +1,6 @@
+import setuptools
 from setuptools import Command, Extension, setup, find_packages
+from setuptools._distutils.dist import Distribution
 from setuptools.command.build_ext import build_ext
 import os
 from os.path import join 
@@ -46,7 +48,7 @@ class BuildExt(build_ext):
             call(batch_file)
         else:
             print('Building external library: grid.a')
-            make_dir = join(setup_dir, f'{working_dir}./external/gridv6')
+            make_dir = join(setup_dir, f'{working_dir}/external/gridv6')
             batch_file = join(setup_dir, f'{setup_dir}/external/gridv6/build.sh')
             with open(batch_file, 'rb') as fid:
                 script = fid.read()
@@ -56,7 +58,6 @@ class BuildExt(build_ext):
     def build_extensions(self):
         self.build_grid_library()
         super().build_extensions()
-
 
 # Create compiler arguments
 include_dirs = []
@@ -112,5 +113,5 @@ setup(
         )
     ],
 
-    build_ext={"build_ext": BuildExt},
+    cmdclass={"build_ext": BuildExt},
 )
